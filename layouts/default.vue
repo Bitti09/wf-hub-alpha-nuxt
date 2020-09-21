@@ -1,55 +1,41 @@
 <template>
-  <div>
-    <Nuxt />
+  <div :class="activetheme.short + ' bg-primary min-h-screen '">
+    <Navbar class="fixed z-10 w-full py-0 pin-t" role="navigation" />
+    <nuxt class="min-h-screen py-16 pt-12" role="main" />
+    <Footer class="fixed bottom-0 z-10 w-full py-2 elevation-24 pin-b" />
   </div>
 </template>
-
 <style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+@media (max-width: 120px) {
+  :root {
+    font-size: 00.75rem !important;
+  }
 }
 </style>
+<script>
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/footer.vue'
+export default {
+  components: {
+    Navbar,
+    Footer,
+  },
+  computed: {
+    activetheme() {
+      if (this.$warehouse.get('theme')) {
+        const value = this.$warehouse.get('theme')
+        this.$store.commit('settheme', value)
+        return this.$store.state.activetheme
+      } else {
+        return this.$store.state.activetheme
+      }
+    },
+  },
+  mounted() {
+    this.$warehouse.each(function (value, key) {
+      // eslint-disable-next-line no-console
+      console.log(key, '==', value)
+    })
+  },
+}
+</script>

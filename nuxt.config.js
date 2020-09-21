@@ -20,7 +20,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: [{ src: '~/plugins/vselect.js', ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -33,10 +33,59 @@ export default {
     '@nuxtjs/tailwindcss',
   ],
 
+  purgeCSS: {
+    whitelistPatterns: [
+      /(^|\.)fa-/,
+      /-fa($|\.)/,
+      /^vueperslide/,
+      /^badger/,
+      /^vs/,
+      /^flag/,
+      /-(leave|enter|appear)(|-(to|from|active))$/,
+      /^(?!(|.*?:)cursor-move).+-move$/,
+      /^nuxt-link(|-exact)-active$/,
+    ],
+  },
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    [
+      'vue-warehouse/nuxt',
+      {
+        vuex: true,
+        plugins: ['store/plugins/expire', 'store/plugins/defaults'],
+        storages: [
+          'store/storages/localStorage',
+          'store/storages/cookieStorage',
+        ],
+      },
+    ],
+    [
+      '@nuxtjs/fontawesome',
+      {
+        component: 'fa',
+        imports: [
+          // import whole set
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: [
+              'faDesktop',
+              'faSun',
+              'faMoon',
+              'faBars',
+              'faGamepad',
+              'faSnowflake',
+              'faPalette',
+            ],
+          },
+          {
+            set: '@fortawesome/free-brands-svg-icons',
+            icons: ['faXbox', 'faPlaystation'],
+          },
+        ],
+      },
+    ],
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
