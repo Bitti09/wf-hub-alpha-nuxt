@@ -4,7 +4,7 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button
-            class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
+            class="inline-flex items-center justify-center p-2 transition duration-150 ease-in-out rounded-md text-primary hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white"
             @click="opennav = !opennav"
           >
             <svg
@@ -36,26 +36,15 @@
           class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start"
         >
           <div
-            class="hidden py-2 pr-2 font-medium leading-5 text-white transition duration-150 ease-in-out rounded-md sm:block text-md focus:outline-none focus:text-white focus:bg-gray-700"
+            class="hidden py-2 pr-2 text-xl font-bold leading-5 transition duration-150 ease-in-out rounded-md text-primary sm:block focus:outline-none focus:text-white focus:bg-gray-700"
           >
-            Warframe Info Hub
+            Warframe Hub
           </div>
-          <div
-            class="block py-2 pr-2 font-medium leading-5 text-white transition duration-150 ease-in-out rounded-md sm:hidden text-md focus:outline-none focus:text-white focus:bg-gray-700"
-          >
-            Warframe Info Hub for
-          </div>
-          <div
-            class="block py-2 pr-2 font-medium leading-5 text-white transition duration-150 ease-in-out rounded-md sm:hidden text-md focus:outline-none focus:text-white focus:bg-gray-700"
-          >
-            in
-          </div>
-
           <div class="hidden sm:block sm:ml-6">
             <div class="flex">
               <a
                 href="#"
-                class="px-3 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-gray-900 rounded-md focus:outline-none focus:text-white focus:bg-gray-700"
+                class="px-3 py-2 text-sm leading-5 transition duration-150 ease-in-out bg-gray-900 rounded-md font-solid text-primary focus:outline-none focus:text-white focus:bg-gray-700"
                 >Home</a
               >
             </div>
