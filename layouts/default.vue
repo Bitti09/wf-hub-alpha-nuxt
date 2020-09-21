@@ -25,15 +25,7 @@ export default {
       return this.$store.state.activetheme
     },
     activelocale() {
-      if (this.$warehouse.get('locale')) {
-        const value = this.$warehouse.get('locale')
-        this.$store.commit('commitLocale', value)
-        // eslint-disable-next-line no-console
-        console.log('state ==', this.$store.state.activelocale)
-        return this.$store.state.activelocale
-      } else {
-        return this.$store.state.activelocale
-      }
+      return this.$store.state.activelocale
     },
   },
   mounted() {
