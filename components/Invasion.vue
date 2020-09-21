@@ -80,7 +80,6 @@ table.table > thead > tr {
 </style>
 
 <script>
-import moment from 'moment'
 export default {
   name: 'InvasionsPanel',
   props: ['invasions'],
@@ -120,31 +119,6 @@ export default {
         x = x * -1
       }
       return x
-    },
-    timediff(var1) {
-      var1 = var1 * 1
-      const start = moment(var1)
-      // eslint-disable-next-line
-      var ms = moment.duration(start.diff(moment().valueOf()))
-      // eslint-disable-next-line
-      let days = ''
-      let hours = ''
-      let minutes = ' '
-      let seconds = ' '
-      if (ms.days() * -1 > 0) {
-        days = ms.days() * -1 + 'd '
-      }
-      if (ms.hours() > 0) {
-        hours = ms.hours() + 'h:'
-      }
-      if (ms.minutes() > 0) {
-        minutes = ms.minutes() + 'm:'
-      }
-      if (ms.seconds() > 0) {
-        seconds = ms.seconds() + 's'
-      }
-      const t = days + hours + minutes + seconds
-      return t
     },
   },
 }
