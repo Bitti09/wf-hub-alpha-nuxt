@@ -40,6 +40,7 @@
 .theme-normal {
   --color-bg-navbar: #194c6c;
   --color-bg-primary: #222;
+  --color-bg-box: #2c2f33;
   --color-bg-darker: #303030;
   --color-bg-newsbox: rgba(48, 48, 48, 0.829) !important;
   --color-bg-boxaccent: grey;

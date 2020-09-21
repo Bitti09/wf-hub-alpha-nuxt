@@ -1,14 +1,33 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
-      <h1 class="title">wf-hub-alpha-nuxt</h1>
+      <invasions :invasions="worldstate.invasions" />
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { mapState, mapGetters } from 'vuex'
+
+import Invasions from '~/components/Invasion.vue'
+
+export default {
+  components: {
+    invasions: Invasions,
+  },
+  computed: {
+    ...mapState({
+      componentState: 'components',
+      gridState: 'grid',
+    }),
+    ...mapGetters({
+      worldstate: 'worldstate',
+      ostron: 'ostronSyndicate',
+      solaris: 'solarisSyndicate',
+      entrati: 'entratiSyndicate',
+    }),
+  },
+}
 </script>
 
 <style>

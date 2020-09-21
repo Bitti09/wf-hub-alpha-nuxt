@@ -149,23 +149,33 @@ export const actions = {
     const ws = await res.json()
     commit('commitWs', [getters.platform, ws])
   },
+  async nuxtClientInit(context) {
+    const { commit, getters } = context
+    const res = await fetch(`${apiBase}/${getters.platform}`, {
+      headers: {
+        'Accept-Language': getters.locale,
+      },
+    })
+    const ws = await res.json()
+    commit('commitWs', [getters.platform, ws])
+  },
 }
 export const getters = {
-  worldstate: (state) => state.worldstates[state.platform],
+  worldstate: (state) => state.worldstates[state.activeplatform.short],
   ostronSyndicate: (state) => {
-    const worldstate = state.worldstates[state.platform]
+    const worldstate = state.worldstates[state.activeplatform.short]
     return (worldstate.syndicateMissions || []).filter((syndicate) =>
       syndicate.id.includes('CetusSyndicate')
     )[0]
   },
   solarisSyndicate: (state) => {
-    const worldstate = state.worldstates[state.platform]
+    const worldstate = state.worldstates[state.activeplatform.short]
     return (worldstate.syndicateMissions || []).filter((syndicate) =>
       syndicate.id.includes('SolarisSyndicate')
     )[0]
   },
   entratiSyndicate: (state) => {
-    const worldstate = state.worldstates[state.platform]
+    const worldstate = state.worldstates[state.activeplatform.short]
     return (worldstate.syndicateMissions || []).filter((syndicate) =>
       syndicate.id.includes('EntratiSyndicate')
     )[0]
