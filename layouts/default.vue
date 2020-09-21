@@ -22,16 +22,33 @@ export default {
   },
   computed: {
     activetheme() {
-      if (this.$warehouse.get('theme')) {
-        const value = this.$warehouse.get('theme')
-        this.$store.commit('settheme', value)
-        return this.$store.state.activetheme
+      return this.$store.state.activetheme
+    },
+    activelocale() {
+      if (this.$warehouse.get('locale')) {
+        const value = this.$warehouse.get('locale')
+        this.$store.commit('commitLocale', value)
+        // eslint-disable-next-line no-console
+        console.log('state ==', this.$store.state.activelocale)
+        return this.$store.state.activelocale
       } else {
-        return this.$store.state.activetheme
+        return this.$store.state.activelocale
       }
     },
   },
   mounted() {
+    if (this.$warehouse.get('locale')) {
+      const value = this.$warehouse.get('locale')
+      this.$store.commit('commitLocale', value)
+    }
+    if (this.$warehouse.get('theme')) {
+      const value = this.$warehouse.get('theme')
+      this.$store.commit('settheme', value)
+    }
+    if (this.$warehouse.get('platform')) {
+      const value = this.$warehouse.get('platform')
+      this.$store.commit('commitPlatform', value)
+    }
     this.$warehouse.each(function (value, key) {
       // eslint-disable-next-line no-console
       console.log(key, '==', value)

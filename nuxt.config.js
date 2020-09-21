@@ -23,6 +23,7 @@ export default {
   plugins: [
     { src: '~/plugins/vselect.js', ssr: false },
     { src: '~/plugins/nuxt-client-init.js', ssr: false },
+    { src: '~/plugins/langflags.js', ssr: false },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

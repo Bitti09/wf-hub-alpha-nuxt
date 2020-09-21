@@ -57,6 +57,31 @@
             <div class="hidden py-3 sm:block">
               <v-select
                 class="w-auto number-col"
+                :value="$store.state.activelocale"
+                :searchable="false"
+                :clearable="false"
+                :filterable="false"
+                :v-model="$store.state.activelocale"
+                :options="$store.state.locale"
+                @input="setSelectedLocale"
+              >
+                <template slot="option" slot-scope="option">
+                  <span class="mr-1 -ml-2"
+                    ><lang-flag :iso="option.short" :squared="false"
+                  /></span>
+                  {{ option.label }}
+                </template>
+                <template slot="selected-option" slot-scope="option">
+                  <span class="mr-1"
+                    ><lang-flag :iso="option.short" :squared="false"
+                  /></span>
+                  {{ option.label }}
+                </template>
+              </v-select>
+            </div>
+            <div class="hidden py-3 sm:block">
+              <v-select
+                class="w-auto number-col"
                 :value="$store.state.activetheme"
                 :searchable="false"
                 :clearable="false"
@@ -79,6 +104,30 @@
                 </template>
               </v-select>
             </div>
+            <div class="hidden py-3 sm:block">
+              <v-select
+                :value="$store.state.activeplatform"
+                class="w-auto number-col"
+                :searchable="false"
+                :clearable="false"
+                :v-model="$store.state.activeplatform"
+                :options="$store.state.platform"
+                @input="setSelectedplatform"
+              >
+                <template slot="option" slot-scope="option">
+                  <span class="mr-1 -ml-2"
+                    ><fa :icon="option.icon" fixed-width class="fill-current"
+                  /></span>
+                  {{ option.label }}
+                </template>
+                <template slot="selected-option" slot-scope="option">
+                  <span class="mr-1"
+                    ><fa :icon="option.icon" fixed-width
+                  /></span>
+                  {{ option.label }}
+                </template></v-select
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -100,6 +149,49 @@
             href="#"
             class="block px-3 py-2 text-base font-medium text-white transition duration-150 ease-in-out bg-gray-900 rounded-md focus:outline-none focus:text-white focus:bg-gray-700"
             >Home</a
+          >
+          <v-select
+            class="text-primary"
+            :value="$store.state.activelocale"
+            :searchable="false"
+            :clearable="false"
+            :filterable="false"
+            :v-model="$store.state.activelocale"
+            :options="$store.state.lang"
+            @input="setSelectedLocale"
+          >
+            <template slot="option" slot-scope="option">
+              <span class="mr-1 -ml-2"
+                ><lang-flag :iso="option.short" :squared="false"
+              /></span>
+              {{ option.label }}
+            </template>
+            <template slot="selected-option" slot-scope="option">
+              <span class="mr-1"
+                ><lang-flag :iso="option.short" :squared="false"
+              /></span>
+              {{ option.label }}
+            </template>
+          </v-select>
+          <v-select
+            :value="$store.state.activeplatform"
+            class="text-primary"
+            :searchable="false"
+            :clearable="false"
+            :v-model="$store.state.activeplatform"
+            :options="$store.state.platform"
+            @input="setSelectedplatform"
+          >
+            <template slot="option" slot-scope="option">
+              <span class="mr-1 -ml-2"
+                ><fa :icon="option.icon" fixed-width class="fill-current"
+              /></span>
+              {{ option.label }}
+            </template>
+            <template slot="selected-option" slot-scope="option">
+              <span class="mr-1"><fa :icon="option.icon" fixed-width /></span>
+              {{ option.label }}
+            </template></v-select
           >
           <v-select
             class="text-primary"
@@ -199,6 +291,24 @@ export default {
 
       // eslint-disable-next-line no-console
       console.log(this.$warehouse.get('theme'))
+    },
+    setSelectedLocale(value) {
+      this.$warehouse.set('locale', value)
+      this.$store.commit('commitLocale', value)
+      this.opennav = false
+
+      // eslint-disable-next-line no-console
+      console.log(this.$warehouse.get('locale'))
+      this.$store.dispatch('updateWorldstate')
+    },
+    setSelectedplatform(value) {
+      this.$warehouse.set('platform', value)
+      this.$store.commit('commitPlatform', value)
+      this.opennav = false
+
+      // eslint-disable-next-line no-console
+      console.log(this.$warehouse.get('platform'))
+      this.$store.dispatch('updateWorldstate')
     },
   },
 }
