@@ -8,7 +8,7 @@
       Invasions
     </div>
     <div class="pt-0 bg-box text-primary">
-      <div v-if="!invasions" class="text-primary">
+      <div v-if="!inva" class="text-primary">
         <div
           class="relative px-4 py-3 text-red-700 bg-transparent border border-red-400 rounded"
           role="alert"
@@ -16,7 +16,7 @@
           <strong class="font-bold">No Invasions today</strong>
         </div>
       </div>
-      <template v-else>
+      <div v-else>
         <div
           class="grid items-center grid-cols-2 px-2 py-2 pl-2 pr-4 border-b-4 border-gray-600"
         >
@@ -25,9 +25,9 @@
             Location
           </span>
         </div>
-        <badger-accordion ref="myAccordion" :icons="false">
-          <badger-accordion-item v-for="inva in invasions" :key="inva.id">
-            <div slot="header" class="flex items-center px-2">
+        <v-collapse-group>
+          <v-collapse-wrapper v-for="inva in invasions" :key="inva.id">
+            <div class="flex items-center px-2" v-collapse-toggle>
               <p class="w-full">
                 <span :class="getcolourfaction(inva.attackingFaction)">
                   {{ inva.attackingFaction }}</span
@@ -40,7 +40,7 @@
               <span class="w-3/4 p-2 pr-0 text-right">{{ inva.node }}</span>
             </div>
             <div
-              slot="content"
+              v-collapse-content
               class="break-all border-b border-gray-600 bg-box"
             >
               <div class="grid grid-cols-2 gap-0 px-2 py-1">
@@ -64,14 +64,24 @@
                 </div>
               </div>
             </div>
-          </badger-accordion-item>
-        </badger-accordion>
-      </template>
+          </v-collapse-wrapper>
+        </v-collapse-group>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.v-collapse-content {
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
+  padding: 0;
+}
+.v-collapse-content-end {
+  transition: max-height 0.3s ease-in;
+  max-height: 500px;
+}
 table.table div,
 table.table th,
 table.table > thead > tr {
@@ -86,6 +96,7 @@ export default {
   data() {
     return {
       platinum: 'platinum',
+      inva: {},
     }
   },
   computed: {
@@ -97,6 +108,13 @@ export default {
     },
     activelang1() {
       return this.$store.state.activelang.short
+    },
+  },
+  watch: {
+    // Whenever the movie prop changes, fetch new data
+    invasions(invasions) {
+      // Fetch data about the movie
+      this.inva = invasions
     },
   },
   methods: {

@@ -25,6 +25,7 @@ export default {
     { src: '~/plugins/nuxt-client-init.js', ssr: false },
     { src: '~/plugins/langflags.js', ssr: false },
     { src: '~/plugins/accordion.js', ssr: false },
+    { src: '~/plugins/collapse.js', ssr: false },
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
